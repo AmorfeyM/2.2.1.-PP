@@ -1,5 +1,8 @@
 package hiber.model;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import javax.persistence.*;
 
 @Entity
@@ -8,6 +11,7 @@ public class User {
 
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
+   @Column(name = "id")
    private Long id;
 
    @Column(name = "name")
@@ -19,8 +23,7 @@ public class User {
    @Column(name = "email")
    private String email;
 
-   @Column(name = "car")
-   @OneToOne
+   @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
    private Car car;
 
    public User() {}
@@ -35,31 +38,48 @@ public class User {
       return id;
    }
 
-   public void setId(Long id) {
-      this.id = id;
-   }
-
    public String getFirstName() {
       return firstName;
-   }
-
-   public void setFirstName(String firstName) {
-      this.firstName = firstName;
    }
 
    public String getLastName() {
       return lastName;
    }
 
-   public void setLastName(String lastName) {
-      this.lastName = lastName;
-   }
-
    public String getEmail() {
       return email;
    }
 
+   public Car getCar() {
+      return car;
+   }
+
+   public void setId(Long id) {
+      this.id = id;
+   }
+
+   public void setFirstName(String firstName) {
+      this.firstName = firstName;
+   }
+
+   public void setLastName(String lastName) {
+      this.lastName = lastName;
+   }
+
    public void setEmail(String email) {
       this.email = email;
+   }
+
+   public Car setCar(Car car) {
+      this.car = car;
+      return car;
+   }
+
+   @Override
+   public String toString() {
+      return "User: \n" +
+              "firstName = " + firstName + "\n" +
+              "lastName = " + lastName + "\n" +
+              "email = " + email + "\n";
    }
 }
