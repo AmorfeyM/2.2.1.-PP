@@ -9,26 +9,26 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-
 public class UserServiceImp implements UserService {
 
    @Autowired
    private UserDao userDao;
 
-   @Transactional
    @Override
+   @Transactional
    public void add(User user) {
       userDao.add(user);
    }
 
-   @Transactional(readOnly = true)
    @Override
+   @Transactional(readOnly = true)
    public List<User> listUsers() {
       return userDao.listUsers();
    }
 
-   @Transactional(readOnly = true)
+
    @Override
+   @Transactional(readOnly = true)
    public User getUserWithCar(String model, int series) {
       return userDao.getUserWithCar(model, series);
    }
